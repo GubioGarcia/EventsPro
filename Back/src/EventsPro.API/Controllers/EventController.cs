@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using EventsPro.API.Models;
+using EventsPro.API.Data;
 
 namespace EventsPro.API.Controllers
 {
@@ -12,24 +13,16 @@ namespace EventsPro.API.Controllers
     [Route("api/[controller]")]
     public class EventController : ControllerBase
     {
-        public EventController()
+        private readonly DataContext _context;
+        public EventController(DataContext context)
         {
+            _context = context;
         }
 
         [HttpGet]
         public IEnumerable<Event> Get()
         {
-            return new Event[] {
-                new Event () {
-                    EventId = 1,
-                    Tema = "Angular e .Net Core",
-                    Local = "Goiânia",
-                    Lote = "1º Lote",
-                    QtdPessoas = 250,
-                    DataEvent = DateTime.Now.AddDays(2).ToString("dd/MM/yyyy"),
-                    ImagemURL = "Foto.img"
-                }
-            };
+            return _context.Events;
         }
     }
 }
