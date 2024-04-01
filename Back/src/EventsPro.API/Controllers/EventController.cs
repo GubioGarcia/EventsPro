@@ -24,5 +24,29 @@ namespace EventsPro.API.Controllers
         {
             return _context.Events;
         }
+
+        [HttpGet("{id}")]
+        public Event GetById(int id)
+        {
+            return _context.Events.FirstOrDefault(evento => evento.EventId == id);
+        }
+
+        [HttpPost]
+        public string Post()
+        {
+            return "Exemplo";
+        }
+
+        [HttpPut("{id}")]
+        public string Put(int id)
+        {
+            return $"Exemplo = {id}";
+        }
+
+        [HttpDelete("{id}")]
+        public string Delete(int id)
+        {
+            return $"Exemplo = {id}";
+        }
     }
 }
